@@ -1,0 +1,45 @@
+El proceso descrito en el código se centra en la segmentación y el aumento de datos para mejorar la cantidad y la diversidad del conjunto de datos para entrenamiento, utilizando recortes de imágenes. Este enfoque es fundamental cuando los datos disponibles son limitados, ya que permite generar más muestras a partir de las imágenes existentes. A continuación, te explico paso a paso cómo funciona el código:
+
+1. Definición de Directorios de Entrada, Salida y JSON:
+Se especifican las rutas de los directorios donde se encuentran las imágenes de entrada (input_directory), el directorio de salida para las imágenes segmentadas (output_directory) y el directorio donde se guardarán los archivos JSON con los metadatos (json_output_directory).
+
+Si el directorio de salida para los archivos JSON no existe, el código lo crea automáticamente.
+
+2. Funciones para Análisis de Imagen:
+get_black_and_info_percentage:
+
+Esta función se encarga de calcular el porcentaje de píxeles negros (píxeles con valores bajos en todos los canales de color) y el porcentaje de píxeles "informativos" (que no son negros).
+Utiliza un umbral para determinar qué píxeles son considerados negros (por defecto, un umbral de 10).
+El objetivo de esta función es descartar recortes que no tengan suficiente información visual (aquellos con más del 90% de píxeles negros, como áreas sin contenido relevante).
+get_perspective:
+
+Determina la perspectiva de la imagen a partir de su nombre, clasificando las imágenes en "Ortogonal" (si el nombre contiene "ot1"), "Oblicua" (si contiene "ob3") o "desconocida".
+3. Segmentación en Recortes (Tiles):
+Se establece un tamaño de recorte de 16x16 píxeles (definido en tile_size).
+
+El código recorre todas las imágenes en el directorio de entrada. Por cada imagen, se divide en recortes de 16x16 píxeles utilizando un bucle anidado.
+
+Para cada recorte:
+
+Se calcula su nombre de archivo único (que incluye las coordenadas del recorte en la imagen original).
+Se guarda el recorte en el directorio de salida.
+4. Filtrado por Calidad (Información Significativa):
+Después de guardar el recorte, se calcula el porcentaje de píxeles informativos (aquellos que no son negros) utilizando la función get_black_and_info_percentage.
+Si el porcentaje de píxeles informativos es mayor al 90%, el recorte se considera válido y se sigue con el proceso de generación de metadatos.
+5. Generación de Metadatos:
+Se generan metadatos para cada recorte que incluye:
+Información como el ID de la imagen original y el ID del recorte.
+Clase de la imagen (en este caso, siempre "Vegetación que no pertenece a muérdago", aunque se podría modificar si se detecta muérdago).
+Perspectiva, que se determina con la función get_perspective.
+Coordenadas del recorte en la imagen original, y metadatos sobre la captura (latitud, longitud, fecha, etc.).
+Si el recorte contiene muérdago (esto se puede simular cambiando el valor de contiene_muerdago), se añaden detalles adicionales, como la especie de muérdago y el grado de infestación.
+6. Guardado de Metadatos en Formato JSON:
+Para cada recorte válido, los metadatos generados se guardan en un archivo JSON con el mismo nombre que el archivo de la imagen recortada.
+7. Eliminación de Recortes con Poca Información:
+Si un recorte tiene menos del 10% de píxeles informativos (más del 90% son negros), se elimina del sistema para evitar usar recortes vacíos o irrelevantes en el conjunto de datos de entrenamiento.
+8. Resumen de Proceso:
+Al finalizar el proceso, se imprime un resumen de la cantidad de imágenes recortadas y guardadas exitosamente, así como las imágenes descartadas por no cumplir con el umbral de calidad.
+Enfoque del Aumento de Datos:
+El proceso de recortes (o tiles) es una técnica comúnmente utilizada en el aumento de datos, especialmente cuando se tiene un conjunto de datos limitado. Dividir las imágenes en recortes más pequeños permite que el modelo vea más ejemplos durante el entrenamiento, lo que puede mejorar su capacidad para generalizar, especialmente en escenarios de aprendizaje profundo donde se requieren grandes cantidades de datos.
+
+Este enfoque también es útil para proporcionar variabilidad en las posiciones y áreas de las imágenes, lo cual es importante si se espera que el modelo aprenda a identificar objetos o patrones en diversas ubicaciones de la imagen.

@@ -1,0 +1,36 @@
+stages:
+  prepare_data:
+    cmd: python src/prepare_data.py
+    deps:
+      - src/prepare_data.py
+      - data/raw
+    outs:
+      - data/train
+      - data/validation
+
+  train_model:
+    cmd: python src/train_model.py
+    deps:
+      - src/train_model.py
+      - src/resnet34.py
+      - data/train
+      - data/validation
+      - params.yaml
+      - src/validation_model.py
+      - src/evaluation_metrics.py
+    outs:
+      - weights/Model_ResNet.pth
+      - weights/Model_ResNet_epoch_{epoch + 1}.pth
+      - weights/Pesos_Model_ResNet.pth
+      - metrics/training_metrics.csv
+      - metrics/accuracy_class.json
+      - metrics/evaluation_metrics.json
+      - plots/ResNet_CM.png
+
+  evaluate_model:
+    cmd: python src/performance_graphs.py
+    deps:
+      - src/performance_graphs.py
+      - metrics/training_metrics.csv
+    outs:
+      - plots/ResNet_Plot.png
