@@ -5,21 +5,21 @@ stages:
     deps:
     - path: data/raw
       hash: md5
-      md5: cfa6ff343eea4089ad09d21def784cd0.dir
-      size: 197850904
-      nfiles: 368844
+      md5: fb28ce2d4c52a54f70e7ed74a8f74b75.dir
+      size: 198473618
+      nfiles: 369977
     - path: src/prepare_data.py
       hash: md5
-      md5: 1a5737ee9b3ebab376650d6fa98c3cfd
-      size: 3629
+      md5: 561bb36df399bed0ca9f316056472c48
+      size: 3651
     outs:
     - path: data/train
       hash: md5
-      md5: 614c191faf2e30b8d29e656ccfa2cd72.dir
-      size: 533102
-      nfiles: 1008
+      md5: 2d86a84866e0872634149dc4bb0234cd.dir
+      size: 2127873
+      nfiles: 4000
     - path: data/validation
       hash: md5
-      md5: 07b28dab19323c89d2defc307751d69f.dir
-      size: 309483
-      nfiles: 568
+      md5: 9ba26cb3baa749211823d9b3bdd346ce.dir
+      size: 1138886
+      nfiles: 2108
