@@ -1,10 +1,9 @@
-# Importaciones de librerías necesarias
 import os  # Para operaciones con directorios y rutas
 import random  # Para selección aleatoria de imágenes
 from collections import defaultdict  # Para conteo de imágenes por clase
 from torchvision.datasets import ImageFolder  # Para cargar conjuntos de datos de imágenes
 from torchvision import transforms  # Para transformaciones de imágenes
-from shutil import copy2  # Para copiar archivos
+from shutil import copy2, rmtree  # Para copiar y eliminar carpetas
 
 # Definición de rutas de directorios para datos
 RAW_DATA_DIR = "data/raw"  # Directorio de datos originales
@@ -17,6 +16,16 @@ transforms = transforms.Compose([
     transforms.ToTensor(),  # Convierte imágenes a tensores de PyTorch
     transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])  # Normalización estándar
 ])
+
+def delete_and_create_dir(directory: str):
+    """
+    Verifica si un directorio existe, lo elimina si es necesario, y lo crea.
+    """
+    if os.path.exists(directory):
+        rmtree(directory)  # Elimina el directorio existente
+        print(f"Directorio existente eliminado: {directory}")
+    os.makedirs(directory, exist_ok=True)  # Crea un nuevo directorio
+    print(f"Directorio creado: {directory}")
 
 def balance_dataset(dataset: ImageFolder, output_dir: str):
     """
@@ -49,8 +58,9 @@ def balance_dataset(dataset: ImageFolder, output_dir: str):
         # Agregar imágenes seleccionadas con sus etiquetas
         balanced_samples += [(img, dataset.class_to_idx[folder]) for img in selected_images]
 
-    # Guardar imágenes balanceadas
-    os.makedirs(output_dir, exist_ok=True)
+    # Eliminar y crear el directorio de salida
+    delete_and_create_dir(output_dir)
+
     for img_path, label in balanced_samples:
         # Crear subdirectorios para cada clase
         class_folder = os.path.join(output_dir, dataset.classes[label])
