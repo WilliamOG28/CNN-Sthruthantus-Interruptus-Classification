@@ -23,3 +23,77 @@ stages:
       md5: b6908e70263e30e2247d9ddd07a80f80.dir
       size: 264742
       nfiles: 480
+  train_model:
+    cmd: python src/train_model.py
+    deps:
+    - path: data/train
+      hash: md5
+      md5: 9a16601c603fbdc7cc09b8adbf410205.dir
+      size: 880975
+      nfiles: 1668
+    - path: data/validation
+      hash: md5
+      md5: b6908e70263e30e2247d9ddd07a80f80.dir
+      size: 264742
+      nfiles: 480
+    - path: params.yaml
+      hash: md5
+      md5: 7fc2b8d3bef90a49156226b281a85098
+      size: 154
+    - path: src/evaluation_metrics.py
+      hash: md5
+      md5: 2ebd03444335e027a6f2d601729d72f1
+      size: 5570
+    - path: src/resnet34.py
+      hash: md5
+      md5: e726f44021f5378b1615fab0199e06dd
+      size: 5008
+    - path: src/train_model.py
+      hash: md5
+      md5: 59272f1da23922a333c3e55f990aa346
+      size: 2870
+    - path: src/validation_model.py
+      hash: md5
+      md5: 7f54993ab2061aa54394cdc331cc3a9c
+      size: 1005
+    outs:
+    - path: metrics/accuracy_class.json
+      hash: md5
+      md5: 6e5792f1b898a6b24bf851b62a732b83
+      size: 466
+    - path: metrics/evaluation_metrics.json
+      hash: md5
+      md5: c81ed1ae56bc0573da8bffd7b68300a9
+      size: 150
+    - path: metrics/training_metrics.csv
+      hash: md5
+      md5: d80cc08861f8ebeed02ae9ccad318be3
+      size: 802
+    - path: plots/ResNet_CM.png
+      hash: md5
+      md5: 74b80346f8002e156a5205a2bf30cec7
+      size: 33193
+    - path: weights/Model_ResNet.pth
+      hash: md5
+      md5: aaf659b2af4350d31536be84174c60bf
+      size: 85300825
+    - path: weights/Pesos_Model_ResNet.pth
+      hash: md5
+      md5: 31b6912a36d2f664c42566e2345d2a09
+      size: 85284993
+  evaluate_model:
+    cmd: python src/performance_graphs.py
+    deps:
+    - path: metrics/training_metrics.csv
+      hash: md5
+      md5: d80cc08861f8ebeed02ae9ccad318be3
+      size: 802
+    - path: src/performance_graphs.py
+      hash: md5
+      md5: 617abad0d8e71bdb9c6a99fdfdc7709c
+      size: 1722
+    outs:
+    - path: plots/ResNet_Plot.png
+      hash: md5
+      md5: b9c293a752a4a8d8f8b485b5af7e8e01
+      size: 61367
