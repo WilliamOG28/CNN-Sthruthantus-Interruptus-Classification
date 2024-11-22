@@ -53,13 +53,18 @@ print(f"Numero de tiles usados para entrenamiento: {len(train_dataset)}\n")
 print(f"Numero de tiles usados para validacion: {len(valid_dataset)}\n")
 
 # Guardar métricas en CSV
-csv_file = r'C:/Users/messi/Desktop/Proyecto_Muerdago/metrics/training_metrics.csv'
+csv_file = r'metrics/training_metrics.csv'
 with open(csv_file, mode="w", newline="") as file:
     writer = csv.writer(file)
     writer.writerow(["Epoch", "Train_Loss", "Train_Accuracy", "Validation_Loss", "Validation_Accuracy"])
 
 # Verificar dispositivo
-device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+if torch.cuda.is_available():
+    device = torch.device("cuda:0")
+    print("Se utilizara cuda para el modelo\n")
+else:
+    device = torch.device('cpu')
+    print("Se utilizara cpu para el modelo\n")
 
 # Entrenar el modelo
 def train_model(model):
@@ -70,6 +75,6 @@ def train_model(model):
     elif isinstance(model, models.densenet.DenseNet):
         train_densenet(model)
     else:
-        print("El modelo seleccionado no est� configurado.")
+        print("El modelo seleccionado no esta configurado.")
         return
 train_model(model)

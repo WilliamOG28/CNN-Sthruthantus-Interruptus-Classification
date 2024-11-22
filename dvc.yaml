@@ -20,7 +20,6 @@ stages:
       - src/evaluation_metrics.py
     outs:
       - weights/Model_ResNet.pth
-      - weights/Model_ResNet_epoch_{epoch + 1}.pth
       - weights/Pesos_Model_ResNet.pth
       - metrics/training_metrics.csv
       - metrics/accuracy_class.json

@@ -69,7 +69,7 @@ def train_resnet(device, edited_model,num_classes,train_loader, valid_loader, cl
         # Guardar pesos del modelo cada 10 épocas
         if (epoch + 1) % save_weights_every == 0:
             # Construcción de la ruta de guardado utilizando el número de época
-            ruta_guardado_pesos = f'C:/Users/messi/Desktop/Proyecto_Muerdago/weights/Model_ResNet_epoch_{epoch + 1}.pth'
+            ruta_guardado_pesos = f'weights/Model_ResNet_epoch_{epoch + 1}.pth'
             # Guardar los pesos del modelo en la ruta especificada
             torch.save(Train_Model.state_dict(), ruta_guardado_pesos)
 
@@ -80,6 +80,6 @@ def train_resnet(device, edited_model,num_classes,train_loader, valid_loader, cl
     # Agrega las métricas globales a las listas para su posterior análisis
     #%%Guardar el modelo
     # Guardar el estado del modelo (pesos) en un archivo .pth
-    torch.save(Train_Model.state_dict(), r"C:/Users/messi/Desktop/Proyecto_Muerdago/weights\Pesos_Model_ResNet.pth")
+    torch.save(Train_Model.state_dict(), r"weights\Pesos_Model_ResNet.pth")
     # Guardar el modelo completo en un archivo .pth
-    torch.save(Train_Model, r"C:/Users/messi/Desktop/Proyecto_Muerdago/weights\Model_ResNet.pth")
+    torch.save(Train_Model, r"weights\Model_ResNet.pth")

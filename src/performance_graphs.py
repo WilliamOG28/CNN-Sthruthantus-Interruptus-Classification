@@ -2,7 +2,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 #%%Función para graficar métricas
 
-csv_file = r'C:/Users/messi/Desktop/Proyecto_Muerdago/metrics/training_metrics.csv'
+csv_file = r'metrics/training_metrics.csv'
 
 def grafic(csv_file):
     # Cargar los datos desde el archivo CSV
@@ -35,8 +35,7 @@ def grafic(csv_file):
     plt.xlabel('Epoch')
     plt.ylabel('Accuracy')
     plt.legend()
-    plt.savefig(r'C:/Users/messi/Desktop/Proyecto_Muerdago/plots/ResNet_Plot.png')
-    # Muestra la figura con los subgráficos
-    plt.show()
+    plt.savefig(r'plots/ResNet_Plot.png')
 
+    # Muestra la figura con los subgráficos
 grafic(csv_file)

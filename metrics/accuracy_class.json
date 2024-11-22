@@ -1,22 +1,22 @@
 {
     "Arbol_Muerto": {
-        "Correct": 135,
-        "Total": 142,
-        "Accuracy": 0.9507042253521126
+        "Correct": 102,
+        "Total": 120,
+        "Accuracy": 0.85
     },
     "Struthanthus_Interruptus": {
-        "Correct": 99,
-        "Total": 142,
-        "Accuracy": 0.6971830985915493
+        "Correct": 80,
+        "Total": 120,
+        "Accuracy": 0.6666666666666666
     },
     "Urbano": {
-        "Correct": 115,
-        "Total": 142,
-        "Accuracy": 0.8098591549295775
+        "Correct": 91,
+        "Total": 120,
+        "Accuracy": 0.7583333333333333
     },
     "Vegetacion": {
-        "Correct": 98,
-        "Total": 142,
-        "Accuracy": 0.6901408450704225
+        "Correct": 92,
+        "Total": 120,
+        "Accuracy": 0.7666666666666667
     }
 }
