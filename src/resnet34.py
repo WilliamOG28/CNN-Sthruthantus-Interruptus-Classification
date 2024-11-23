@@ -4,7 +4,9 @@ import time  # Importa el módulo time para medir el tiempo de ejecución.
 from validation_model import validate_model
 from evaluation_metrics import metrics, accuracy_per_class
 import csv
+import os
 
+os.environ['CPL_LOG'] = 'OFF'
 def train_resnet(device, edited_model,num_classes,train_loader, valid_loader, classes, lr,num_epochs, csv_file,save_weights_every):
     Train_Model = nn.Sequential(edited_model,
                                   nn.Flatten(), # Creamos una capa de aplanamiento para la salida del modelo

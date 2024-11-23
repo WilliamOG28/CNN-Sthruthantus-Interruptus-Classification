@@ -1,0 +1,12 @@
+{
+    "muerdago": {
+        "Correct": 22,
+        "Total": 33,
+        "Accuracy": 0.6666666666666666
+    },
+    "no_muerdago": {
+        "Correct": 27,
+        "Total": 33,
+        "Accuracy": 0.8181818181818182
+    }
+}
