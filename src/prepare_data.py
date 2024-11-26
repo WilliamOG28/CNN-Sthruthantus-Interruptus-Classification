@@ -80,5 +80,3 @@ def prepare_dataset():
     balance_dataset(validation_dataset, VALIDATION_DIR)
 
     print("Preprocesamiento completado.")
-
-prepare_dataset()

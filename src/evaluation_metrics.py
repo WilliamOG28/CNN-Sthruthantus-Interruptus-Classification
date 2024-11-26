@@ -6,7 +6,7 @@ import seaborn as sns  # Biblioteca para visualización de datos estadísticos
 import json  # Biblioteca para manejar archivos JSON
 
 # Función para calcular métricas de rendimiento del modelo
-def metrics(Train_Model, valid_loader, classes, device, output_file=r'C:/Users/messi/Desktop/Proyecto_Muerdago/metrics/evaluation_metrics.json'):
+def metrics(Train_Model, valid_loader, classes, device, output_file=r'metrics/evaluation_metrics.json'):
     """
     Función para calcular y visualizar métricas de rendimiento de un modelo de clasificación.
     
@@ -75,8 +75,7 @@ def metrics(Train_Model, valid_loader, classes, device, output_file=r'C:/Users/m
     plt.xlabel('Predicted Class')
     plt.ylabel('Real Class')
     plt.title('Confusion Matrix')
-    plt.savefig(r'C:/Users/messi/Desktop/Proyecto_Muerdago/plots/ResNet_CM.png')
-    plt.show()
+    plt.savefig(r'plots/ResNet_CM.png')
 
     # Imprime métricas de evaluación
     print(f"Accuracy: {accuracy}\n")
@@ -86,7 +85,7 @@ def metrics(Train_Model, valid_loader, classes, device, output_file=r'C:/Users/m
 
 
 # Función para calcular precisión por cada clase
-def accuracy_per_class(Train_Model, valid_loader, classes, device, output_file=r'C:/Users/messi/Desktop/Proyecto_Muerdago/metrics/accuracy_class.json'):
+def accuracy_per_class(Train_Model, valid_loader, classes, device, output_file=r'metrics/accuracy_class.json'):
     """
     Función para calcular la precisión del modelo para cada clase individual.
 
